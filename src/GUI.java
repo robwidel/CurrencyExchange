@@ -1,23 +1,74 @@
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class GUI {
+public class GUI implements ActionListener {
 
     JFrame frame;
-    JTextField textField1, textField2;
+    JTextField textField1, textField2, textField3, textField4, textFieldRate;
     JPanel panel;
     JButton button;
     double num1, num2;
     String dir; //which way to exchange
+    Font font = new Font("SansSerif", Font.PLAIN ,20);
 
     GUI(){
         frame = new JFrame("Currency Exchange Calculator");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(800,600);
+        frame.setSize(500,600);
         frame.setLayout(null);
+        //funty
+        textField1 = new JTextField();
+        textField1.setBounds(100,100, 150,50);
+        textField1.setFont(font);
+        textField1.setHorizontalAlignment(JTextField.CENTER);
+        frame.getContentPane().add(textField1);
+        //plny
+        textField2 = new JTextField();
+        textField2.setBounds(100,170, 150,50);
+        textField2.setFont(font);
+        textField2.setHorizontalAlignment(JTextField.CENTER);
+        frame.getContentPane().add(textField2);
+
+        textField3 = new JTextField("GBP");
+        textField3.setBounds(300,110, 50,30);
+        textField3.setFont(font);
+        textField3.setHorizontalAlignment(JTextField.CENTER);
+        textField3.setEditable(false);
+        frame.getContentPane().add(textField3);
+
+        textField4 = new JTextField("PLN");
+        textField4.setBounds(300,180, 50,30);
+        textField4.setFont(font);
+        textField4.setHorizontalAlignment(JTextField.CENTER);
+        textField4.setEditable(false);
+        frame.getContentPane().add(textField4);
+
+        textFieldRate = new JTextField();
+        textFieldRate.setBounds(100,400, 250,30);
+        textFieldRate.setFont(font);
+        textFieldRate.setHorizontalAlignment(JTextField.CENTER);
+        textField4.setEditable(false);
+        frame.getContentPane().add(textFieldRate);
+
+        button = new JButton("Calculate");
+        button.setBounds(100,290,200,70);
+        button.addActionListener(this);
+        frame.getContentPane().add(button);
 
         frame.setVisible(true);
 
-
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource()==button){
+            System.out.println("AAAAAAA KLIKNIETE");
+        }
+    }
+
+    public void fillRateTextField(String rate){
+        textFieldRate.setText("1 GBP equals " + rate + " PLN");
+    }
 }

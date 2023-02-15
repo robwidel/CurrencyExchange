@@ -4,4 +4,3 @@ Class GUI creates a GUI that is responsible for visual part of application.
 
 TODO:
 -> some test
--> logic for calculating rate through button click

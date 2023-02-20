@@ -1,15 +1,10 @@
-import com.google.gson.Gson;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.FileWriter;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.util.Scanner;
 
 

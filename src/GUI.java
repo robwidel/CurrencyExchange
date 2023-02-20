@@ -1,11 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.IOException;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 
-public class GUI implements ActionListener {
+public class GUI implements ActionListener, KeyListener {
 
     JFrame frame;
     JTextField textField1, textField2, textField3, textField4, textFieldRate, textError;
@@ -13,8 +10,10 @@ public class GUI implements ActionListener {
     Font font = new Font("Monospaced", Font.PLAIN, 16);
     String rate;
     Boolean poundToZloty = true;
+    public String textFieldVal;
 
-    GUI(String rate) {
+
+    public GUI(String rate) {
         this.rate = rate;
         frame = new JFrame("Currency Exchange Calculator");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -31,7 +30,7 @@ public class GUI implements ActionListener {
             public void focusGained(FocusEvent e) {
                 textField2.setEditable(false);
                 poundToZloty = true;
-                textError.setText(String.valueOf(poundToZloty));
+                //textError.setText(String.valueOf(poundToZloty));
             }
             @Override
             public void focusLost(FocusEvent e) {
@@ -50,7 +49,7 @@ public class GUI implements ActionListener {
             public void focusGained(FocusEvent e) {
                 textField1.setEditable(false);
                 poundToZloty = false;
-                textError.setText(String.valueOf(poundToZloty));
+                //textError.setText(String.valueOf(poundToZloty));
             }
 
             @Override
@@ -91,21 +90,40 @@ public class GUI implements ActionListener {
         textError.setForeground(Color.RED);
         frame.getContentPane().add(textError);
 
+
         button = new JButton("Calculate");
         button.setBounds(100, 290, 200, 70);
         button.addActionListener(this);
         frame.getContentPane().add(button);
 
+        textField1.addKeyListener(this);
+        textField2.addKeyListener(this);
         frame.setVisible(true);
-
+//        frame.getRootPane().setDefaultButton(button);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == button) {
-            Logic.CalculateUponClick(this, poundToZloty);
+            textFieldVal = Logic.CalculateUponClick(this, poundToZloty);
         }
     }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        textFieldVal = Logic.CalculateUponClick(this, poundToZloty);
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        textFieldVal = Logic.CalculateUponClick(this, poundToZloty);
+    }
+
+
 }
 
 

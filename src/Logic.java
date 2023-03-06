@@ -4,7 +4,8 @@ import java.math.RoundingMode;
 public class Logic {
 
 
-    public static String CalculateUponClick(GUI gui, Boolean poundToZloty){
+    public static String CalculateUponClick(GUI gui, Boolean poundToZloty) throws NumberFormatException{
+
 
         if (!gui.textField1.getText().equals("")  && poundToZloty==true) {
             try {
@@ -44,11 +45,32 @@ public class Logic {
                 gui.textError.setText("WRONG DATA FORMAT");
             }
 
-
         }
-        if (gui.textField2.getText().equals("") || gui.textField1.getText().equals("")){
+
+        try {
+            if (!((Double) Double.parseDouble(gui.textField1.getText()) instanceof Double)) {
+                gui.textField2.setText("");
+                gui.textError.setText("WRONG DATA FORMAT");
+            }
+            if (!((Double) Double.parseDouble(gui.textField2.getText()) instanceof Double)) {
+                gui.textField1.setText("");
+                gui.textError.setText("WRONG DATA FORMAT");
+            }
+        } catch (NumberFormatException error) {
+        gui.textError.setText("WRONG DATA FORMAT");
             gui.textField1.setText("");
             gui.textField2.setText("");
+        }
+
+        if (gui.textField1.getText().equals("") && !gui.textField2.getText().equals("")) {
+            gui.textField2.setText("");
+        }
+        else if (gui.textField2.getText().isEmpty() && !gui.textField1.getText().equals("")) {
+            gui.textField1.setText("");
+        }
+
+        if(gui.textField2.getText().isEmpty() && gui.textField2.getText().isEmpty()){
+            gui.textError.setText("Enter some new numbers");
         }
 
     return "";}

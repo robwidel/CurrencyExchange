@@ -82,7 +82,7 @@ public class GUI implements ActionListener, KeyListener {
         textFieldRate.setEditable(false);
         frame.getContentPane().add(textFieldRate);
 
-        textError = new JTextField();
+        textError = new JTextField("Enter some numbers");
         textError.setBounds(100, 20, 300, 30);
         textError.setFont(font);
         textError.setHorizontalAlignment(JTextField.CENTER);
@@ -99,9 +99,11 @@ public class GUI implements ActionListener, KeyListener {
         textField1.addKeyListener(this);
         textField2.addKeyListener(this);
         frame.setVisible(true);
-//        frame.getRootPane().setDefaultButton(button);
+        frame.getRootPane().setDefaultButton(button);
+
     }
 
+    // no longer needed as value change with textfield change through keylistener interface
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == button) {
@@ -111,6 +113,7 @@ public class GUI implements ActionListener, KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
+        //textFieldVal = Logic.CalculateUponClick(this, poundToZloty);
     }
 
     @Override

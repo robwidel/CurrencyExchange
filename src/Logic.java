@@ -4,42 +4,49 @@ import java.math.RoundingMode;
 public class Logic {
 
 
-    public static String CalculateUponClick(GUI gui, Boolean poundToZloty) throws NumberFormatException{
+    public static void CalculateUponClick(GUI gui, Boolean poundToZloty) throws NumberFormatException{
+        BigDecimal guiRate = new BigDecimal(gui.rate);
 
-
-        if (!gui.textField1.getText().equals("")  && poundToZloty==true) {
+        if (!gui.textField1.getText().equals("")  && poundToZloty) {
             try {
-                double temp = Double.parseDouble(gui.textField1.getText());
-                if(temp < 0 ){
+                BigDecimal temp = new BigDecimal(gui.textField1.getText()).setScale(4, RoundingMode.HALF_DOWN);
+
+                //double temp = Double.parseDouble(gui.textField1.getText());
+                if(temp.doubleValue() < 0 ){
                     gui.textError.setText("NUMBER IS NEGATIVE");
                     gui.textField2.setText("0");
                 }
-                else if ((Double) temp instanceof Double) {
-                    double plnMoney = temp * Double.parseDouble(gui.rate);
-                    gui.textField2.setText(String.valueOf(BigDecimal.valueOf(plnMoney).setScale(4, RoundingMode.HALF_DOWN)));
+                else if ( temp instanceof BigDecimal) {
+                    //double plnMoney = temp * Double.parseDouble(gui.rate);
+
+                    BigDecimal plnMoney = temp.multiply(guiRate).setScale(4, RoundingMode.HALF_UP);
+
+                    gui.textField2.setText(plnMoney.toString());
                     gui.textError.setText("Calculation done");
-                    System.out.println(gui.textField2.getText());
-                    return gui.textField2.getText();
+                    //System.out.println(gui.textField2.getText());
 
                 }
             } catch (NumberFormatException error) {
                 gui.textError.setText("WRONG DATA FORMAT");
             }
         }
-        if (!gui.textField2.getText().equals("") && poundToZloty == false) {
+        if (!gui.textField2.getText().equals("") && !poundToZloty ) {
             try {
-
-                double temp2 = Double.parseDouble(gui.textField2.getText());
-                if(temp2 < 0 ){
+                BigDecimal temp2 = new BigDecimal(gui.textField2.getText()).setScale(4, RoundingMode.HALF_DOWN);
+                //double temp2 = Double.parseDouble(gui.textField2.getText());
+                if(temp2.doubleValue() < 0 ){
                     gui.textError.setText("NUMBER IS NEGATIVE");
                     gui.textField1.setText("0");
                 }
-                else if ((Double) temp2 instanceof Double) {
-                    double gbpMoney = temp2 / Double.parseDouble(gui.rate);
-                    gui.textField1.setText(String.valueOf(BigDecimal.valueOf(gbpMoney).setScale(4, RoundingMode.HALF_DOWN)));
+                else if ( temp2 instanceof BigDecimal) {
+                    //double gbpMoney = temp2 / Double.parseDouble(gui.rate);
+
+                    BigDecimal gbpMoney = temp2.divide(guiRate, 4, RoundingMode.HALF_UP);
+
+                    gui.textField1.setText(gbpMoney.toString());
                     gui.textError.setText("Calculation done");
-                    System.out.println(gui.textField1.getText());
-                    return gui.textField1.getText();
+                    //System.out.println(gui.textField1.getText());
+
                 }
             } catch (NumberFormatException error) {
                 gui.textError.setText("WRONG DATA FORMAT");
@@ -73,7 +80,7 @@ public class Logic {
             gui.textError.setText("Enter some new numbers");
         }
 
-    return "";}
+    }
 
 }
 

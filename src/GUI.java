@@ -10,7 +10,7 @@ public class GUI implements ActionListener, KeyListener {
     Font font = new Font("Monospaced", Font.PLAIN, 16);
     String rate;
     Boolean poundToZloty = true;
-    public String textFieldVal;
+
 
 
     public GUI(String rate) {
@@ -107,10 +107,11 @@ public class GUI implements ActionListener, KeyListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == button) {
-            textFieldVal = Logic.CalculateUponClick(this, poundToZloty);
+            Logic.CalculateUponClick(this, poundToZloty);
         }
     }
 
+    //when key is typed/pressed/released the gui refreshes the output throught Logic.CalculateUponClick function
     @Override
     public void keyTyped(KeyEvent e) {
         //textFieldVal = Logic.CalculateUponClick(this, poundToZloty);
@@ -118,12 +119,12 @@ public class GUI implements ActionListener, KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        textFieldVal = Logic.CalculateUponClick(this, poundToZloty);
+        Logic.CalculateUponClick(this, poundToZloty);
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        textFieldVal = Logic.CalculateUponClick(this, poundToZloty);
+        Logic.CalculateUponClick(this, poundToZloty);
     }
 
 
